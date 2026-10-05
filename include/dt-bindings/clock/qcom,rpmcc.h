@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
- * Copyright 2015-2020 Linaro Limited
+ * Copyright 2015-2020, Linaro Limited
  */
 
 #ifndef _DT_BINDINGS_CLK_MSM_RPMCC_H
@@ -37,10 +37,6 @@
 #define RPM_XO_A0				27
 #define RPM_XO_A1				28
 #define RPM_XO_A2				29
-#define RPM_NSS_FABRIC_0_CLK			30
-#define RPM_NSS_FABRIC_0_A_CLK			31
-#define RPM_NSS_FABRIC_1_CLK			32
-#define RPM_NSS_FABRIC_1_A_CLK			33
 
 /* SMD RPM clocks */
 #define RPM_SMD_XO_CLK_SRC			0
@@ -156,5 +152,12 @@
 #define RPM_SMD_RF_CLK5_PIN			110
 #define RPM_SMD_RF_CLK5_A_PIN			111
 #define RPM_SMD_BIMC_FREQ_LOG			112
+#define RPM_SMD_CPUSS_GNOC_CLK			113
+#define RPM_SMD_CPUSS_GNOC_A_CLK		114
 
+/* --- appended 5.10-only symbols (union for taoyao port) --- */
+#define RPM_NSS_FABRIC_0_CLK			30
+#define RPM_NSS_FABRIC_0_A_CLK			31
+#define RPM_NSS_FABRIC_1_CLK			32
+#define RPM_NSS_FABRIC_1_A_CLK			33
 #endif

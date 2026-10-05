@@ -34,11 +34,12 @@
 #define RPMH_QPIC_CLK				25
 #define RPMH_DIV_CLK1				26
 #define RPMH_DIV_CLK1_A				27
+
+/* --- appended 5.10-only symbols (union for taoyao port) --- */
 #define RPMH_LN_BB_CLK7				28
 #define RPMH_LN_BB_CLK7_A			29
 #define RPMH_LN_BB_CLK8				30
 #define RPMH_LN_BB_CLK8_A			31
 #define RPMH_LN_BB_CLK9				32
 #define RPMH_LN_BB_CLK9_A			33
-
 #endif

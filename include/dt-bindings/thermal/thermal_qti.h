@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /* Copyright (c) 2020-2021, The Linux Foundation. All rights reserved. */
+/* Copyright (c) 2022, Qualcomm Innovation Center, Inc. All rights reserved. */
 
 #include <dt-bindings/thermal/thermal.h>
 
@@ -41,27 +42,56 @@
 #define QMI_MMW_PA2		27
 #define QMI_MMW_PA3		28
 #define QMI_SDR_MMW		29
-#define QMI_QTM_THERM		30
-#define QMI_BCL_WARN		31
-#define QMI_SDR0_PA0		32
-#define QMI_SDR0_PA1		33
-#define QMI_SDR0_PA2		34
-#define QMI_SDR0_PA3		35
-#define QMI_SDR0_PA4		36
-#define QMI_SDR0_PA5		37
-#define QMI_SDR0		38
-#define QMI_SDR1_PA0		39
-#define QMI_SDR1_PA1		40
-#define QMI_SDR1_PA2		41
-#define QMI_SDR1_PA3		42
-#define QMI_SDR1_PA4		43
-#define QMI_SDR1_PA5		44
-#define QMI_SDR1		45
-#define QMI_MMW0		46
-#define QMI_MMW1		47
-#define QMI_MMW2		48
-#define QMI_MMW3		49
-#define QMI_MMW_IFIC0		50
+#define QMI_MSM_SKIN		30
+#define QMI_BEAMER_N_THERM	31
+#define QMI_BEAMER_E_THERM	32
+#define QMI_BEAMER_W_THERM	33
+#define QMI_QFE_RET_PA0_FR1	34
+#define QMI_QFE_WTR_PA0_FR1	35
+#define QMI_QFE_WTR_PA1_FR1	36
+#define QMI_QFE_WTR_PA2_FR1	37
+#define QMI_QFE_WTR_PA3_FR1	38
+#define QMI_QFE_WTR0_FR1	39
+#define QMI_QTM_THERM		40
+#define QMI_BCL_WARN		41
+#define QMI_SDR0_PA0		42
+#define QMI_SDR0_PA1		43
+#define QMI_SDR0_PA2		44
+#define QMI_SDR0_PA3		45
+#define QMI_SDR0_PA4		46
+#define QMI_SDR0_PA5		47
+#define QMI_SDR0		48
+#define QMI_SDR1_PA0		49
+#define QMI_SDR1_PA1		50
+#define QMI_SDR1_PA2		51
+#define QMI_SDR1_PA3		52
+#define QMI_SDR1_PA4		53
+#define QMI_SDR1_PA5		54
+#define QMI_SDR1		55
+#define QMI_MMW0		56
+#define QMI_MMW1		57
+#define QMI_MMW2		58
+#define QMI_MMW3		59
+#define QMI_MMW_IFIC0		60
+#define QMI_RF_CAL          61
+#define QMI_QFE_WTR_PA_4	62
+#define QMI_QFE_WTR_PA_5	63
+#define QMI_QFE_WTR_PA_6	64
+#define QMI_QFE_WTR_PA4_FR1	65
+#define QMI_QFE_WTR_PA5_FR1	66
+#define QMI_QFE_WTR_PA6_FR1	67
+#define QMI_QFE_RET_PA_1	68
+#define QMI_QFE_RET_PA1_FR1	69
+#define QMI_SDR0_PA		70
+#define QMI_SDR1_PA		71
+
+#define QMI_MODEM_INST_ID	0x0
+#define QMI_ADSP_INST_ID	0x1
+#define QMI_CDSP_INST_ID	0x43
+#define QMI_SLPI_INST_ID	0x53
+#define QMI_MODEM_NR_INST_ID	0x64
+
+/* --- appended 5.10-only symbols (union for taoyao port) --- */
 #define QMI_SUB1_MODEM_CFG	51
 #define QMI_SUB1_LTE_CC		52
 #define QMI_SUB1_MCG_FR1_CC	53
@@ -75,19 +105,10 @@
 #define QMI_SUB2_SCG_FR1_CC	61
 #define QMI_SUB2_SCG_FR2_CC	62
 #define QMI_NSP_ISENSE_TRIM	63
-#define QMI_SDR0_PA		64
-#define QMI_SDR1_PA		65
 #define QMI_MODEM_CFG	66
 #define QMI_LTE_CC		67
 #define QMI_MCG_FR1_CC	68
 #define QMI_MCG_FR2_CC	69
 #define QMI_SCG_FR1_CC	70
 #define QMI_SCG_FR2_CC	71
-
-#define QMI_MODEM_INST_ID	0x0
-#define QMI_ADSP_INST_ID	0x1
-#define QMI_CDSP_INST_ID	0x43
-#define QMI_SLPI_INST_ID	0x53
-#define QMI_MODEM_NR_INST_ID	0x64
-
 #endif

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
- * Copyright (c) 2021, Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2020 The Linux Foundation. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_QCOM_SPMI_VADC_PM7325_H
@@ -63,5 +63,4 @@
 #define PM7325_ADC7_GPIO4_DIV3			(PM7325_SID << 8 | 0x8d)
 
 #define PM7325_ADC7_VPH_PWR			(PM7325_SID << 8 | 0x8e)
-
-#endif /* _DT_BINDINGS_QCOM_SPMI_VADC_PM7325_H */
+#endif

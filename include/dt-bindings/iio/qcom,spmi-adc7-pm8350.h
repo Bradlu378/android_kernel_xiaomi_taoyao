@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
- * Copyright (c) 2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2019 The Linux Foundation. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_QCOM_SPMI_VADC_PM8350_H
@@ -63,5 +63,4 @@
 #define PM8350_ADC7_GPIO4_DIV3			(PM8350_SID << 8 | 0x8d)
 
 #define PM8350_ADC7_VPH_PWR			(PM8350_SID << 8 | 0x8e)
-
-#endif /* _DT_BINDINGS_QCOM_SPMI_VADC_PM8350_H */
+#endif

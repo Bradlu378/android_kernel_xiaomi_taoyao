@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
- * Copyright (c) 2020-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  */
 
 #ifndef __DT_BINDINGS_INTERCONNECT_QCOM_ICC_H
@@ -23,10 +23,6 @@
 #define QCOM_ICC_TAG_ALWAYS		(QCOM_ICC_TAG_AMC | QCOM_ICC_TAG_WAKE |\
 					 QCOM_ICC_TAG_SLEEP)
 
-/*
- * PERF_MODE indicates that each node in the requested path should use
- * performance-optimized settings if supported by the node.
- */
+/* --- appended 5.10-only symbols (union for taoyao port) --- */
 #define QCOM_ICC_TAG_PERF_MODE		(1 << 3)
-
 #endif

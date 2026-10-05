@@ -1,29 +1,8 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
-/* Copyright (c) 2018-2020, The Linux Foundation. All rights reserved. */
+/* Copyright (c) 2018-2021, The Linux Foundation. All rights reserved. */
 
 #ifndef __AUDIO_CODEC_PORT_TYPES_H
 #define __AUDIO_CODEC_PORT_TYPES_H
-
-#define OFFSET1_VAL0 0
-#define OFFSET1_VAL1 1
-#define OFFSET1_VAL2 2
-#define OFFSET1_VAL3 3
-#define OFFSET1_VAL4 4
-#define OFFSET1_VAL5 5
-#define OFFSET1_VAL6 6
-#define OFFSET1_VAL7 7
-#define OFFSET1_VAL8 8
-#define OFFSET1_VAL9 9
-#define OFFSET1_VAL10 10
-#define OFFSET1_VAL11 11
-#define OFFSET1_VAL12 12
-#define OFFSET1_VAL13 13
-#define OFFSET1_VAL14 14
-#define OFFSET1_VAL15 15
-
-#define LANE0 0
-#define LANE1 1
-#define LANE2 2
 
 #define SPKR_L 1
 #define SPKR_L_COMP 2
@@ -71,5 +50,26 @@
 #define SWRM_TX3_CH3 44
 #define SWRM_TX3_CH4 45
 #define SWRM_PCM_IN 46
+#define SWRM_RX_PCM_IN 47
 
-#endif /* __AUDIO_CODEC_PORT_TYPES_H */
+/* --- appended 5.10-only symbols (union for taoyao port) --- */
+#define OFFSET1_VAL0 0
+#define OFFSET1_VAL1 1
+#define OFFSET1_VAL2 2
+#define OFFSET1_VAL3 3
+#define OFFSET1_VAL4 4
+#define OFFSET1_VAL5 5
+#define OFFSET1_VAL6 6
+#define OFFSET1_VAL7 7
+#define OFFSET1_VAL8 8
+#define OFFSET1_VAL9 9
+#define OFFSET1_VAL10 10
+#define OFFSET1_VAL11 11
+#define OFFSET1_VAL12 12
+#define OFFSET1_VAL13 13
+#define OFFSET1_VAL14 14
+#define OFFSET1_VAL15 15
+#define LANE0 0
+#define LANE1 1
+#define LANE2 2
+#endif
