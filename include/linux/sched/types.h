@@ -20,4 +20,8 @@ struct task_cputime {
 	unsigned long long		sum_exec_runtime;
 };
 
+
+struct sched_param {
+	int sched_priority;
+};
 #endif

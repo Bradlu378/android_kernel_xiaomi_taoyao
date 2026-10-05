@@ -215,7 +215,8 @@ static int cpu_thermal_init(void)
 	return ret;
 }
 
-static void destory_thermal_cpu(){
+static void destory_thermal_cpu(void)
+{
 	struct cpufreq_device *priv, *tmp;
 	list_for_each_entry_safe(priv, tmp, &cpufreq_dev_list, node) {
 		freq_qos_remove_request(priv->qos_req);
@@ -886,7 +887,7 @@ static int thermal_check_panel(struct device_node *np)
 	if (PTR_ERR(prim_panel) == -EPROBE_DEFER) {
 		pr_err("%s ERROR: Cannot fine prim_panel of node!", __func__);
 	}
-	printk(KERN_ERR "%s: count of panel in node PTR_ERR_prim_panel  is: %d\n",__func__ , PTR_ERR(prim_panel));
+	printk(KERN_ERR "%s: count of panel in node PTR_ERR_prim_panel  is: %ld\n",__func__ , PTR_ERR(prim_panel));
 #if IS_ENABLED(CONFIG_HAVE_MULTI_SCREEN)
 find_sec_panel:
 	count = of_count_phandle_with_args(np, "panel1", NULL);
@@ -907,13 +908,13 @@ find_sec_panel:
 	if (PTR_ERR(sec_panel) == -EPROBE_DEFER) {
 		pr_err("%s ERROR: Cannot fine sec_panel of node!", __func__);
 	}
-	printk(KERN_ERR "%s: count of panel1 in node PTR_ERR_sec_panel  is: %d\n",__func__ , PTR_ERR(sec_panel));
+	printk(KERN_ERR "%s: count of panel1 in node PTR_ERR_sec_panel  is: %ld\n",__func__ , PTR_ERR(sec_panel));
 #endif
 out:
 	return 0;
 }
 
-static void create_thermal_message_node()
+static void create_thermal_message_node(void)
 {
 	int ret = 0;
 	struct kernfs_node *sysfs_sd = NULL;
@@ -977,7 +978,7 @@ static void screen_state_check(struct work_struct *work)
 	struct device_node *node;
 	void *pvt_data = NULL;
 	int error = 0;
-	static retry_count = 10;
+	static int retry_count = 10;
 
 	node = of_find_node_by_name(NULL, "thermal-screen");
 	if (!node) {

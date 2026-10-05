@@ -521,6 +521,15 @@ config MSM_GCC_LAHAINA
 	  LAHAINA devices.
 	  Say Y if you want to use peripheral devices such as UART, SPI, I2C,
 	  USB, UFS, SD/eMMC, PCIe, etc.
+config SM_GCC_YUPIK
+	tristate "YUPIK Global Clock Controller (SM7325)"
+	depends on COMMON_CLK_QCOM
+	help
+	  Support for the global clock controller on Qualcomm Technologies, Inc.
+	  YUPIK (SM7325 / Snapdragon 778G) devices. This is the production
+	  driver for TAOYAO/Xiaomi 12 Lite binding qcom,yupik-gcc.
+	  Say Y if you want to use peripheral devices such as UART, SPI,
+	  I2C, USB, UFS, SD/eMMC, PCIe, etc.
 
 config MSM_VIDEOCC_LAHAINA
 	tristate "LAHAINA Video Clock Controller"

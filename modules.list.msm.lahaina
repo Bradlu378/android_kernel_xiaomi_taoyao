@@ -17,11 +17,13 @@ clk-aop-qmp.ko
 clk-rpmh.ko
 gdsc-regulator.ko
 gcc-lahaina.ko
+gcc-yupik.ko
 dispcc-lahaina.ko
 qnoc-lahaina.ko
 icc-bcm-voter.ko
 pinctrl-msm.ko
 pinctrl-lahaina.ko
+pinctrl-yupik.ko
 qcom-scm.ko
 qcom-pdc.ko
 iommu-logger.ko

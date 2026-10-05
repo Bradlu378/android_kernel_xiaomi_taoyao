@@ -113,6 +113,8 @@
 #define SPAD_LPI_LB_PRED_WAKEUP_EN     0x0284
 #define SPAD_LPI_LB_FF_CLK_ON_CTRL     0x1254
 
+#define BANK_OFFSET_STRIDE            0x80000
+
 static u32 llcc_offsets_v2[] = {
 	0x0,
 	0x80000,
@@ -397,6 +399,28 @@ static const struct llcc_slice_config anorak_data[] =  {
 	{LLCC_MMUHWT,	18, 768,  1, 1,	0xFFFFFFFF, 0x0, 0, 0, 0, 0, 1,	0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 	{LLCC_CVP,	28,  64,  3, 1,	0xFFFFFFFF, 0x0, 0, 0, 0, 0, 0,	0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 	{LLCC_WRTCH,	31, 512,  1, 1,	0xFFFFFFFF, 0x0, 0, 0, 0, 0, 1,	0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+};
+
+/* YUPIK (SM7325) v2 LLCC slice table — ported verbatim from TAOYAO 5.4
+ * drivers/soc/qcom/llcc-yupik.c yupik_data[]. Designated initializers map each
+ * value to the CUPID struct field by name (TAOYAO macro order dca,wse,rp,a maps
+ * to dis_cap_alloc,write_scid_en,retain_on_pc,activate_on_init).
+ */
+static const struct llcc_slice_config yupik_data[] = {
+	{ .usecase_id = LLCC_CPUSS,	.slice_id = 1,	.max_cap = 768, .priority = 1, .fixed_size = 0, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 1 },
+	{ .usecase_id = LLCC_MDMHPGRW,	.slice_id = 7,	.max_cap = 512, .priority = 2, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_CMPT,	.slice_id = 10,	.max_cap = 768, .priority = 1, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_GPUHTW,	.slice_id = 11,	.max_cap = 256, .priority = 1, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_GPU,	.slice_id = 12,	.max_cap = 512, .priority = 1, .fixed_size = 0, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_MMUHWT,	.slice_id = 13,	.max_cap = 256, .priority = 1, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 0, .activate_on_init = 1 },
+	{ .usecase_id = LLCC_MDMPNG,	.slice_id = 21,	.max_cap = 768, .priority = 0, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_WLNHW,	.slice_id = 24,	.max_cap = 256, .priority = 1, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+	{ .usecase_id = LLCC_MDMVPE,	.slice_id = 29,	.max_cap = 64,	.priority = 1, .fixed_size = 1, .bonus_ways = 0x3F, .res_ways = 0x0, .cache_mode = 0, .probe_target_ways = 0, .dis_cap_alloc = 0, .write_scid_en = 0, .retain_on_pc = 1, .activate_on_init = 0 },
+};
+
+static const struct qcom_llcc_config yupik_cfg = {
+	.sct_data       = yupik_data,
+	.size           = ARRAY_SIZE(yupik_data),
 };
 
 static const struct qcom_llcc_config anorak_cfg = {
@@ -1525,6 +1549,35 @@ static int qcom_llcc_probe(struct platform_device *pdev)
 			drv_data->num_banks =
 				ARRAY_SIZE(llcc_offsets_v21_diwali);
 		}
+	} else if (of_property_match_string(dev->of_node,
+					    "compatible", "qcom,yupik-llcc") >= 0) {
+		/* YUPIK (SM7325) v2 LLCC: bank count is not fixed like the
+		 * legacy llcc_offsets_v2 table; read LB_CNT from STATUS0 and
+		 * build per-instance offsets at BANK_OFFSET_STRIDE stride,
+		 * matching TAOYAO 5.4 drivers/soc/qcom/llcc-slice.c probe.
+		 */
+		u32 lb_cnt;
+
+		drv_data->llcc_ver = 20;
+		llcc_regs = llcc_regs_v2;
+
+		ret = regmap_read(drv_data->regmap, LLCC_COMMON_STATUS0,
+					&lb_cnt);
+		if (ret)
+			goto err;
+
+		lb_cnt &= GENMASK(31, 28);
+		drv_data->num_banks = lb_cnt >> 28;
+
+		drv_data->offsets = devm_kcalloc(dev, drv_data->num_banks,
+						 sizeof(u32), GFP_KERNEL);
+		if (!drv_data->offsets) {
+			ret = -ENOMEM;
+			goto err;
+		}
+
+		for (i = 0; i < drv_data->num_banks; i++)
+			drv_data->offsets[i] = i * BANK_OFFSET_STRIDE;
 	} else {
 		drv_data->llcc_ver = 20;
 		llcc_regs = llcc_regs_v2;
@@ -1644,6 +1697,7 @@ static const struct of_device_id qcom_llcc_of_match[] = {
 	{ .compatible = "qcom,cape-llcc", .data = &cape_cfg },
 	{ .compatible = "qcom,ukee-llcc", .data = &ukee_cfg },
 	{ .compatible = "qcom,anorak-llcc", .data = &anorak_cfg },
+	{ .compatible = "qcom,yupik-llcc", .data = &yupik_cfg },
 	{ }
 };
 
